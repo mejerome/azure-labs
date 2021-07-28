@@ -1,4 +1,4 @@
-# azure labs
+# Azure labs
 - terraform is a tool for building, changing, and combining infrastructure safely and efficiently.
 - ansible is a powerful automation and deployment tool that makes it easy to automate your entire infrastructure  lifecycle.
 - azure-cli is a command-line tool for managing Azure resources.
