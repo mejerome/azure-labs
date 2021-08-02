@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+  become: yes
+  roles:
+    - nginx
+
+- hosts: database
+  become: yes
+  vars_files:
+    - roles/mysql/group_vars/main.yml
+  roles:
+    - mysql

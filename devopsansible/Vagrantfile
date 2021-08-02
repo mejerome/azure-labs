@@ -1,0 +1,36 @@
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/ubuntu-20.04"
+  config.ssh.insert_key = false
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.linked_clone = true
+  
+    # Customize the amount of memory on the VM:
+    vb.memory = "1024"
+    vb.cpus = "1"
+  end
+  #
+  config.vm.define "web1" do |web1|
+    web1.vm.hostname = "web1.devopsansible.com"
+    web1.vm.network "private_network", ip: "192.168.33.10"
+  end
+
+  config.vm.define "web2" do |web2|
+    web2.vm.hostname = "web2.devopsansible.com"
+    web2.vm.network "private_network", ip: "192.168.33.11"
+  end
+
+  config.vm.define "db1" do |db1|
+    db1.vm.hostname = "db1.devopsansible.com"
+    db1.vm.network "private_network", ip: "192.168.33.12"
+  end
+
+  config.vm.define "db2" do |db2|
+    db2.vm.hostname = "db2.devopsansible.com"
+    db2.vm.network "private_network", ip: "192.168.33.13"
+  end
+end
