@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "subscriptionid": "{{env `ARM_SUBSCRIPTION_ID`}}",
+    "clientid": "{{env `ARM_CLIENT_ID`}}",
+    "clientsecret": "{{env `ARM_CLIENT_SECRET`}}",
+    "tenantid": "{{env `ARM_TENANT_ID`}}",
+
+    "resource_group": "NetworkWatcherRG",
+    "image_name": "linuxWeb",
+    "image_version": "1.0"
+  },
+
+  "builders": [{
+    "type": "azure-arm",
+    "client_id": "{{user `clientid`}}",
+    "client_secret": "{{user `clientsecret`}}",
+    "subscription_id": "{{user `subscriptionid`}}",
+    "tenant_id": "{{user `tenantid`}}",
+
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "18.04-LTS",
+    "location": "East US",
+    "vm_size": "Standard_DS2_v2",
+    "managed_image_resource_group_name": "{{user `resource_group`}}",
+    "managed_image_name": "{{user `image_name`}}-{{user `image_version`}}",
+    "azure_tags": {
+      "version": "{{user `image_version`}}",
+      "role": "webserver"
+    }
+  }],
+
+  "provisioners": [{
+      "type": "shell",
+      "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'",
+      "inline": [
+        "add-apt-repository ppa:ansible/ansible",
+        "sudo apt-get update",
+        "sudo apt-get install -y ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbook.yml"
+    },
+    {
+      "type": "shell",
+      "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'",
+      "inline": [
+        "/usr/sbin/waagent -force --deprovision+user && export HISTSIZE=0 && sync"
+      ]
+
+    }
+  ]
+}

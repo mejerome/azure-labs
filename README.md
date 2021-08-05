@@ -23,6 +23,16 @@
 - packer is a tool for creating identical machine images for multiple platforms from a single source configuration.
   packer contains a builder, provisioner and variable section in it's configuration file structure.
   variables can be referenced as {{ user 'variable_name' }} in the template.
+
+
 - git is a version control system that is used to store and manage your source code.
 - azure devops is a tool for managing your Azure resources.
 
+- Transition of pages should not scroll to the bottom of the page.
+- SSL error
+- Remove managed logo at the bottom right corner of the page.
+- Photos to add to the website to give it identity
+- Photo on about page should be on the right side
+  Remove shape of the photo, fade it out 
+  Text on image at the about page, text black
+  Small Matha M in the top left corner of all bio images
