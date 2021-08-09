@@ -36,3 +36,6 @@
   Remove shape of the photo, fade it out 
   Text on image at the about page, text black
   Small Matha M in the top left corner of all bio images
+
+- CI/CD pipeline
+  
